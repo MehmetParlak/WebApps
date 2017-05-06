@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Money Transfer</title>
+    </h:head>
+    <h:body>
+        <h2>Please fill the required fields:</h2>
+
+        <h:form>
+            Fill in the details and press the  button.
+            <br/>
+            <h:outputLabel for="username" value="*User name:"/>
+            <h:inputText id ="username" value="#{transactionBean.username}" title="Enter user name" required="true" requiredMessage="Mandatory Field"/>
+            
+            <h:message style="color:red" for="username"/>
+            <br/>
+            <h:outputLabel for="name" value="*First Name: "/>
+            <h:inputText id ="name" value="#{transactionBean.name}" title="Enter name" required="true" label="name" requiredMessage="Mandatory Field"/>
+            <h:message style="color:red" for="name"/>
+            <br/>
+            <h:outputLabel for="surname" value="*Last Name"/>
+            <h:inputText id ="surname" value="#{transactionBean.surname}" title="Enter surname" label="surname" required="true"  requiredMessage="Mandatory Field"/>
+            <h:message style="color:red" for="surname"/>
+            <br/>
+            <h:outputLabel for="amount" value="*Amount"/>
+            <h:inputText id ="amount" value="#{transactionBean.balance}" title="Enter amount" label="amount" required="true"  requiredMessage="Mandatory Field"/>
+            <h:message style="color:red" for="amount"/>
+            <h:outputLabel for="currency" value="*Currency"/>
+            <h:selectOneMenu id ="currency" value="#{transactionBean.currency}" title="Select Currency" label="currency" required="true" requiredMessage="Mandatory Field">
+                <f:selectItem itemValue="GBP"/>
+                <f:selectItem itemValue="USD"/>
+                <f:selectItem itemValue="EUR"/>
+            </h:selectOneMenu>
+            <h:message style="color:red" for="currency"/>
+            <br/>
+
+            <h:commandButton id="send" type="submit" value="Send" action="#{transactionBean.sendMoney}" title="Send Money"/>
+            <h:commandButton id="request" type="submit" value="Request" action="#{transactionBean.requestMoney()}" title="Request Money"/>
+            <h:commandButton id="reset" type="reset" value="Reset Form" title="Reset Form"/>
+        </h:form>
+
+    </h:body>
+</html>
+

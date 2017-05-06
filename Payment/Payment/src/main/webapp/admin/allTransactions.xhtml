@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <h:outputStylesheet library="css" name="table-style.css"  />
+    </h:head>
+    <h:body>
+
+        <h1>Customer Transactions</h1>
+
+        <h:dataTable value="#{transactionBean.allTransactionList}" var="alltransactions" >
+
+            <h:column>
+                <!-- column header -->
+                <f:facet name="header">ID</f:facet>
+                <!-- row record -->
+                #{alltransactions.transactionId}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Sender</f:facet>
+                    #{alltransactions.sender}
+            </h:column>
+
+            <h:column>
+                <!-- column header -->
+                <f:facet name="header">Receiver</f:facet>
+                <!-- row record -->
+                #{alltransactions.receiver}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Currency</f:facet>
+                    #{alltransactions.currency}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Amount</f:facet>
+                    #{alltransactions.amount}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                    #{alltransactions.status}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Date</f:facet>
+                    #{alltransactions.tdate}
+            </h:column>
+
+        </h:dataTable>
+        <h:link value="ReturnHome" outcome="adminHome"/>
+
+    </h:body>
+</html>
