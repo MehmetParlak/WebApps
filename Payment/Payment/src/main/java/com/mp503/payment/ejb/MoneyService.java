@@ -101,7 +101,7 @@ public class MoneyService implements MoneyServiceLocal {
         em.merge(t);
     }//Customers don't see their denied transactions.
 
-    @RolesAllowed("Customer")
+    @RolesAllowed({"Admin", "Customer"})
     @TransactionAttribute(REQUIRED)
     @Override
     public List<Transactions> getCustomerTransactions(String username) {
@@ -116,11 +116,18 @@ public class MoneyService implements MoneyServiceLocal {
 
     }
 
-    @RolesAllowed("Admin")
+    @RolesAllowed({"Admin", "Customer"})
     @TransactionAttribute(REQUIRED)
     @Override
     public List getAllCustomersTransactions() {
         return (List<Transactions>) em.createNamedQuery("Transactions.findAll").getResultList();
+    }
+
+    @RolesAllowed("Customer")
+    @TransactionAttribute(REQUIRED)
+    @Override
+    public List getMoneyRequest(String username) {
+        return (List<Transactions>) em.createNamedQuery("Transactions.findMoneyRequest").setParameter("sender", username).setParameter("status", "R").getResultList();
     }
 
     //@Override
@@ -151,4 +158,5 @@ public class MoneyService implements MoneyServiceLocal {
         }
         return convertedAmount;
     }
+
 }

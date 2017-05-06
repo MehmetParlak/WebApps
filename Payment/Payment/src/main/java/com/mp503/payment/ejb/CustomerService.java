@@ -7,10 +7,7 @@ package com.mp503.payment.ejb;
 
 import com.mp503.payment.entity.Customers;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import static javax.ejb.TransactionAttributeType.REQUIRED;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -34,8 +31,8 @@ public class CustomerService implements CustomerServiceLocal {
         return (Customers) em.createNamedQuery("Customers.findByCustomerId").setParameter("customerId", id).getSingleResult();
     }
 
-    @RolesAllowed("Admin")
-    @TransactionAttribute(REQUIRED)
+    //@RolesAllowed({"Admin","Customer"})
+    //@TransactionAttribute(REQUIRED)
     @Override
     public List<Customers> getAllCustomers() {
         return (List<Customers>) em.createNamedQuery("Customers.findAll").getResultList();

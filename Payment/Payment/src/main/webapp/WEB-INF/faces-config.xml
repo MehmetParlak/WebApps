@@ -31,7 +31,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>alltransactions</from-outcome>
-            <to-view-id>/admin/allTrancastions.xhtml</to-view-id>
+            <to-view-id>/admin/allTransactions.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
         <navigation-case>
@@ -53,8 +53,9 @@
             <redirect></redirect>
         </navigation-case>
         <navigation-case>
-            <from-outcome>requestMoney</from-outcome>
-            <to-view-id>/customer/moneyTransfer.xhtml</to-view-id>
+            <from-action>#{customerBean.showRequests}</from-action>
+            <from-outcome>show</from-outcome>
+            <to-view-id>/customer/requests.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
     </navigation-rule>              
@@ -127,6 +128,11 @@
     <managed-bean>
         <managed-bean-name>transactionBean</managed-bean-name>
         <managed-bean-class>com.mp503.payment.jsf.TransactionBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>adminBean</managed-bean-name>
+        <managed-bean-class>com.mp503.payment.jsf.AdminBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>

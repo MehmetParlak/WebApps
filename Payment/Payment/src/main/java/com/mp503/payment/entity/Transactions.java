@@ -1,4 +1,3 @@
-
 package com.mp503.payment.entity;
 
 import java.io.Serializable;
@@ -21,6 +20,7 @@ import javax.validation.constraints.Size;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Transactions.findAll", query = "SELECT t FROM Transactions t")
+    , @NamedQuery(name = "Transactions.findMoneyRequest", query = "SELECT t FROM Transactions t WHERE t.sender = :sender and t.status= :status")
     , @NamedQuery(name = "Transactions.findByTransactionId", query = "SELECT t FROM Transactions t WHERE t.transactionId = :transactionId")
     , @NamedQuery(name = "Transactions.findBySender", query = "SELECT t FROM Transactions t WHERE t.sender = :sender")
     , @NamedQuery(name = "Transactions.findByReceiver", query = "SELECT t FROM Transactions t WHERE t.receiver = :receiver")
@@ -90,8 +90,6 @@ public class Transactions implements Serializable {
         this.currency = currency;
     }
 
-    
-    
     public Long getTransactionId() {
         return transactionId;
     }
@@ -161,8 +159,6 @@ public class Transactions implements Serializable {
         return hash;
     }
 
-
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -203,8 +199,5 @@ public class Transactions implements Serializable {
     public String toString() {
         return "Transactions{" + "transactionId=" + transactionId + ", sender=" + sender + ", receiver=" + receiver + ", amount=" + amount + ", tdate=" + tdate + ", status=" + status + ", currency=" + currency + '}';
     }
-    
-    
 
-    
 }

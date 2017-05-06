@@ -11,51 +11,39 @@
     </h:head>
     <h:body>
 
-        <h1>Customer Transactions</h1>
+        <h1>Money Requests</h1>
 
-        <h:dataTable value="#{adminBean.allTransactionList}" var="alltransactions" >
+        <h:dataTable value="#{customerBean.moneyRequests}" var="customers" >
 
-            <h:column>
-                <!-- column header -->
-                <f:facet name="header">ID</f:facet>
-                <!-- row record -->
-                #{alltransactions.transactionId}
-            </h:column>
 
             <h:column>
-                <f:facet name="header">Sender</f:facet>
-                    #{alltransactions.sender}
+                <f:facet name="header">Username</f:facet>
+                    #{customers.receiver}
             </h:column>
 
             <h:column>
                 <!-- column header -->
-                <f:facet name="header">Receiver</f:facet>
+                <f:facet name="header">Amount</f:facet>
                 <!-- row record -->
-                #{alltransactions.receiver}
+                #{customers.amount}
             </h:column>
 
             <h:column>
                 <f:facet name="header">Currency</f:facet>
-                    #{alltransactions.currency}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Amount</f:facet>
-                    #{alltransactions.amount}
+                    #{customers.currency}
             </h:column>
 
             <h:column>
                 <f:facet name="header">Status</f:facet>
-                    #{alltransactions.status}
+                    #{customers.status}
             </h:column>
 
             <h:column>
                 <f:facet name="header">Date</f:facet>
-                    #{alltransactions.tdate}
+                    #{customers.tdate}
             </h:column>
 
         </h:dataTable>
-        <h:link value="ReturnHome" outcome="adminHome"/>
 
     </h:body>
 </html>

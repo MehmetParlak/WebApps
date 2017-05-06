@@ -13,11 +13,15 @@
 
         <h:link value="Make a Transfer" outcome="moneyTransfer"/>
         <h:link value="See your transactions" outcome="personalTransactions"/>
-        <h:link value="Request Money" outcome="requestMoney"/>
+        <!--<h:link value="Request Money" outcome="requestMoney"/>-->
 
         <br/>
         <h:form>
             Logout: <h:commandButton value="Logout" action="#{loginBean.logout}"/>
+            Requests(#{customerBean.requstCount}) <h:commandButton value="See" action="#{customerBean.showRequests}"/>
+
         </h:form>
     </h:body>
 </html>
+
+<!-- Buraya yeni bir buton ekleyelim ve üzerinde kaç istek olduğunu göstersin.eg: MoneyRequest(2)   -->

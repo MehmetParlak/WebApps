@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author mehmetparlak
  */
-public class CustomerBean {
+public class AdminBean {
 
     @EJB
     private CustomerServiceLocal customerService;
@@ -34,23 +33,12 @@ public class CustomerBean {
     private double balance;
     private String currency;
     private List<Customers> customers;
-    private List<Transactions> customerTransactions;
-    private List<Transactions> moneyRequests;
-    private int requstCount = 0;
+    private List<Transactions> allTransactionList;
 
-    //Aslında burdan entity classlara hiç ulaşmamak lazım, şimdilik yapalım sonra düzelteleim
-    //Ejb içersindeki metotlardan çağıralım değişkenleri
-    public CustomerBean(String username, String name, String surname, double balance, String currency) {
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.balance = balance;
-        this.currency = currency;
+    public AdminBean() {
     }
-
-    public CustomerBean() {
-
-    }
+    
+    
 
     public CustomerServiceLocal getCustomerService() {
         return customerService;
@@ -116,48 +104,20 @@ public class CustomerBean {
         this.customers = customers;
     }
 
-    public List<Transactions> getCustomerTransactions() {
-        return customerTransactions;
+    public List<Transactions> getAllTransactionList() {
+        return allTransactionList;
     }
 
-    public void setCustomerTransactions(List<Transactions> customerTransactions) {
-        this.customerTransactions = customerTransactions;
+    public void setAllTransactionList(List<Transactions> allTransactionList) {
+        this.allTransactionList = allTransactionList;
     }
 
-    public int getRequstCount() {
-        return requstCount;
-    }
-
-    public void setRequstCount(int requstCount) {
-        this.requstCount = requstCount;
-    }
-
-    public List<Transactions> getMoneyRequests() {
-        return moneyRequests;
-    }
-
-    public void setMoneyRequests(List<Transactions> moneyRequests) {
-        this.moneyRequests = moneyRequests;
-    }
 
     @PostConstruct
     public void getData() {
-        username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        customers = new ArrayList<>();
-        Customers c = customerService.getCustomerByUsername(username);
-        customerTransactions = moneyService.getCustomerTransactions(username);
-        this.name = c.getName();
-        this.surname = c.getSurname();
-        this.balance = c.getBalance();
-        this.currency = c.getCurrency();
-        customers.addAll(customerService.getAllCustomers());
-        requstCount = moneyService.getMoneyRequest(username).size();
+        customers=customerService.getAllCustomers();
+        allTransactionList = moneyService.getAllCustomersTransactions();
 
-    }
-
-    public String showRequests() {
-        moneyRequests = moneyService.getMoneyRequest(username);
-        return "show";
     }
 
 }

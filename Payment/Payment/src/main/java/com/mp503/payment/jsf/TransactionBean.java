@@ -153,7 +153,7 @@ public class TransactionBean {
         System.out.println(senderUsername);
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         transactionList = moneyService.getCustomerTransactions(senderUsername);
-        allTransactionList = moneyService.getAllCustomersTransactions();
+//        allTransactionList = moneyService.getAllCustomersTransactions();
 
     }
 

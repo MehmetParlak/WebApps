@@ -27,4 +27,6 @@ public interface MoneyServiceLocal {
 
     public List getAllCustomersTransactions();
 
+    public List getMoneyRequest(String username);
+
 }
