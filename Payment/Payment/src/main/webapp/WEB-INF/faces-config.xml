@@ -12,6 +12,12 @@
             <to-view-id>/login.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{registrationBean.registerCustomer}</from-action>
+            <from-outcome>registerError</from-outcome>
+            <to-view-id>/registrationError.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/admin/newAdmin.xhtml</from-view-id>
@@ -87,6 +93,20 @@
         <navigation-case>
             <from-action>#{transactionBean.requestMoney}</from-action>
             <from-outcome>requested</from-outcome>
+            <to-view-id>/customer/customerHome.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/customer/requests.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>accept</from-outcome>
+            <to-view-id>/customer/customerHome.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>deny</from-outcome>
             <to-view-id>/customer/customerHome.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>

@@ -128,6 +128,18 @@ public class TransactionBean {
         return "sent";
 
     }
+    
+    
+    public String acceptMoneyRequest(Long id) {
+        moneyService.acceptMoneyRequest(id);
+        return "accept";
+
+    }
+    
+    public String denyMoneyRequest(Long id){
+        moneyService.denyMoneyRequest(id);
+        return "deny";
+    }
 
     public String requestMoney() {
         moneyService.requestMoney(username, senderUsername, balance);

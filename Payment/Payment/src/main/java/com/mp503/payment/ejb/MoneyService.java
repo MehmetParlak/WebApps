@@ -85,6 +85,7 @@ public class MoneyService implements MoneyServiceLocal {
             sender.setBalance(sender.getBalance() - t.getAmount());
             receiver.setBalance(receiver.getBalance() + t.getAmount());
             String status = "S";//sent
+            t.setStatus(status);
             em.merge(t);
             em.persist(sender);
             em.persist(receiver);
@@ -127,7 +128,12 @@ public class MoneyService implements MoneyServiceLocal {
     @TransactionAttribute(REQUIRED)
     @Override
     public List getMoneyRequest(String username) {
+        System.out.println("ALINDIIIIIIIIIIIIIIIIIIIIIIIIII");
+        System.out.println("ALINDIIIIIIIIIIIIIIIIIIIIIIIIII");
+        System.out.println("ALINDIIIIIIIIIIIIIIIIIIIIIIIIII");
+
         return (List<Transactions>) em.createNamedQuery("Transactions.findMoneyRequest").setParameter("sender", username).setParameter("status", "R").getResultList();
+
     }
 
     //@Override

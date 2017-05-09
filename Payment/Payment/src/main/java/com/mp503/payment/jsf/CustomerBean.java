@@ -152,11 +152,12 @@ public class CustomerBean {
         this.currency = c.getCurrency();
         customers.addAll(customerService.getAllCustomers());
         requstCount = moneyService.getMoneyRequest(username).size();
+        moneyRequests = moneyService.getMoneyRequest(username);
 
     }
 
     public String showRequests() {
-        moneyRequests = moneyService.getMoneyRequest(username);
+        //moneyRequests = moneyService.getMoneyRequest(username);
         return "show";
     }
 

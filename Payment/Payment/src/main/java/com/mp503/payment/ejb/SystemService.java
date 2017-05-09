@@ -66,13 +66,15 @@ public class SystemService implements SystemServiceLocal {
     @TransactionAttribute(REQUIRED)
     @Override
     public void registerCustomer(String username, String password, String firstname, String surname, String email, double balance, String currency) {
+
         SystemUser user = new SystemUser(username, password);
         user.setUserpassword(securepassword(password));
         SystemUserGroup usergroup = new SystemUserGroup(username, "Customer");
-        Customers customers = new Customers(firstname, surname, email, balance, currency,user.getUsername());
+        Customers customers = new Customers(firstname, surname, email, balance, currency, user.getUsername());
         em.persist(user);
         em.persist(usergroup);
         em.persist(customers);
+
     }
 
     @Override
@@ -104,10 +106,45 @@ public class SystemService implements SystemServiceLocal {
     public String getUserGroupByName(String name) {
         SystemUserGroup ug = (SystemUserGroup) em.createNamedQuery("SystemUserGroup.findByUsername").setParameter("username", name).getSingleResult();
         System.out.println("-------------MEHMET PARLAK---------------");
-        System.out.println("-------------"+ug.getGroupname()+"---------------");
+        System.out.println("-------------" + ug.getGroupname() + "---------------");
         System.out.println("-------------MEHMET PARLAK---------------");
 
         return ug.getGroupname();
     }
 
+    public int validateUser(String name, String email) {
+
+        
+        System.out.println("BEN SSENIN TAAAAA");
+        System.out.println("USERNAME: "+name+" EMAIL: "+email);
+        int isValidate = 0;
+        long userCount = (long) em.createNamedQuery("SystemUser.findCountByUsername").setParameter("username", name).getSingleResult();
+        long emailCount = (long) em.createNamedQuery("Customers.findCountByEmail").setParameter("email", email).getSingleResult();
+
+        long asd = (long) em.createNamedQuery("SystemUser.findCountByUsername").setParameter("username", "Mentals").getSingleResult();
+
+        
+        System.out.println("***********USERCOUNT*********");
+        System.out.println(userCount);
+        System.out.println("***********EMAILCOUNT*********");
+        System.out.println(emailCount);
+
+        System.out.println("BUDA ASD "+asd);
+        
+        if (userCount <= 0 && emailCount <= 0) {
+            System.out.println("VALID GORUNUYOR");
+            isValidate = 0;
+        } else if (userCount <= 0 && emailCount > 0) {
+            System.out.println("EMAIL DUBLIKE");
+            isValidate = 1;
+        } else if (userCount > 0 && emailCount <= 0) {
+            System.out.println("USERNAME DUBLIKE");
+            isValidate = 2;
+        } else {
+            System.out.println("IKISIDE DUBLIKE");
+            isValidate = 3;
+        }
+        System.out.println("Al Sana Deger: "+isValidate);
+        return isValidate;
+    }
 }

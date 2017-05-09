@@ -22,6 +22,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Customers.findAll", query = "SELECT c FROM Customers c")
+    , @NamedQuery(name = "Customers.findCountByEmail", query = "SELECT count(c.email) FROM Customers c WHERE c.email = :email")
     , @NamedQuery(name = "Customers.findByCustomerId", query = "SELECT c FROM Customers c WHERE c.customerId = :customerId")
     , @NamedQuery(name = "Customers.findByFirstname", query = "SELECT c FROM Customers c WHERE c.name = :name")
     , @NamedQuery(name = "Customers.findByUsername", query = "SELECT c FROM Customers c WHERE c.username = :username")

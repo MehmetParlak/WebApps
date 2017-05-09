@@ -38,4 +38,6 @@ public interface SystemServiceLocal {
     public SystemUser getUserByName(String name);
 
     public String getUserGroupByName(String name);
+
+    public int validateUser(String name, String email);
 }

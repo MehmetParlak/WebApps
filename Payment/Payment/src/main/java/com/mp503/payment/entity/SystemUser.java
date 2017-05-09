@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "SystemUser.findAll", query = "SELECT s FROM SystemUser s")
+    , @NamedQuery(name = "SystemUser.findCountByUsername", query = "SELECT count(s.username) FROM SystemUser s WHERE s.username = :username")
     , @NamedQuery(name = "SystemUser.findById", query = "SELECT s FROM SystemUser s WHERE s.id = :id")
     , @NamedQuery(name = "SystemUser.findByUsername", query = "SELECT s FROM SystemUser s WHERE s.username = :username")
     , @NamedQuery(name = "SystemUser.findByUserpassword", query = "SELECT s FROM SystemUser s WHERE s.userpassword = :userpassword")})
